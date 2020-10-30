@@ -4,8 +4,10 @@ const AccordionElement = ({
 	item,
 	index,
 	onElementClicked,
-	active,
+	active
 }) => {
+
+
 	return (
 		<React.Fragment>
 			<div onClick={() => onElementClicked(index)}>

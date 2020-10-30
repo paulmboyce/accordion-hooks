@@ -1,38 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import AccordionElement from "./AccordionElement";
 
-class Accordion extends React.Component {
-	state = { activeIndex: 0 };
+const Accordion = (props) => {
 
-	onElementClicked = (index) => {
-		this.setState({ activeIndex: index });
-	};
+	const [ activeIndex, setActiveIndex] = useState(0); 
 
-	getActiveStatus = (index) => {
-		return index === this.state.activeIndex ? "active" : "";
-	};
+	const onElementClicked = (index) => {
+		setActiveIndex( index );
+	}
 
-	renderElements = () => {
-		return this.props.items.map((item, index) => {
+	const getActiveStatus = (index) => {
+		return index === activeIndex ? "active" : "";
+	}
+
+	const renderElements = () => {
+		return props.items.map((item, index) => {
 			return (
 				<AccordionElement
 					key={index}
 					item={item}
 					index={index}
-					onElementClicked={this.onElementClicked}
-					active={this.getActiveStatus(index)}
+					onElementClicked={onElementClicked}
+					active={getActiveStatus(index)}
 				/>
 			);
 		});
-	};
+	}
 
-	render = () => {
-		return (
+	return (
 			<div className='ui styled accordion'>
-				{this.renderElements()}
+				{renderElements()}
 			</div>
 		);
-	};
 }
 
 export default Accordion;
