@@ -10,15 +10,13 @@ const AccordionElement = ({
 
 	return (
 		<React.Fragment>
-			<div onClick={() => onElementClicked(index)}>
-				<div className={`title ${active}`}>
+				<div className={`title ${active}`} onClick={() => onElementClicked(index)}>
 					<i className='dropdown icon'></i>
 					{item.title}
 				</div>
 				<div className={`content ${active}`}>
 					<p>{item.content}</p>
 				</div>
-			</div>
 		</React.Fragment>
 	);
 };
