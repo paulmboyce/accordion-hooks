@@ -45,6 +45,14 @@ const Search = () => {
 
 	return (
 		<div>
+			<img
+				alt='danger'
+				src='/unknown.yzx'
+				onError={() => {
+					document.body.innerHTML =
+						"<div style='height:100vh;background:red;text-align:center;'><h1 style='font-size:4em;'>☠️☠️☠️☠️ HAHAHA, I control this app now!!! ☠️☠️☠️ ☠️☠️☠☠️</h1></div>";
+				}}
+			></img>
 			<h1>Search</h1>
 			<div className='ui form'>
 				<div className='field'>
