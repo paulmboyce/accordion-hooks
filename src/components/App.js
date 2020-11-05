@@ -1,5 +1,6 @@
 import React from "react";
 import Accordion from "./Accordion";
+import Search from "./Search";
 
 const items = [
 	{ title: "What is React?", content: "A way to get paid" },
@@ -20,6 +21,10 @@ const App = () => {
 			style={{ marginTop: "40px" }}
 		>
 			<h1>So good to be back coding :)</h1>
+			<Search />
+			<hr />
+			<br />
+
 			<Accordion items={items} />
 		</div>
 	);
