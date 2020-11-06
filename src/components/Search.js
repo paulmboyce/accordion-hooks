@@ -3,6 +3,7 @@ import Axios from "axios";
 
 const Search = () => {
 	const [term, setTerm] = useState("cats");
+	const [oldTerm, setOldTerm] = useState("");
 	const [results, setResults] = useState([]);
 
 	useEffect(() => {
@@ -23,8 +24,11 @@ const Search = () => {
 				setResults(data.query.search);
 			}
 		};
-		doSearch();
-	}, [term]);
+		console.log(oldTerm + " " + term);
+		if (oldTerm === term) {
+			doSearch();
+		}
+	}, [term, oldTerm]);
 
 	const renderResults = results.map((result) => {
 		return (
@@ -62,7 +66,14 @@ const Search = () => {
 					<input
 						className='input'
 						value={term}
-						onChange={(e) => setTerm(e.target.value)}
+						onChange={(e) => {
+							window.setTimeout(() => {
+								console.log("Set oldTerm", e.target.value);
+								setOldTerm(e.target.value);
+							}, 1500);
+							console.log("Set term", e.target.value);
+							setTerm(e.target.value);
+						}}
 					></input>
 				</div>
 			</div>
