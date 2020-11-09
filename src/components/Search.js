@@ -3,7 +3,17 @@ import Axios from "axios";
 
 const Search = () => {
 	const [term, setTerm] = useState("cats");
+	const [shadowTerm, setShadowTerm] = useState(term);
 	const [results, setResults] = useState([]);
+
+	useEffect(() => {
+		let id = window.setTimeout(() => {
+			setShadowTerm(term);
+		}, 700);
+		return () => {
+			window.clearTimeout(id);
+		};
+	}, [term]);
 
 	useEffect(() => {
 		const doSearch = async () => {
@@ -13,7 +23,7 @@ const Search = () => {
 					params: {
 						action: "query",
 						list: "search",
-						srsearch: term,
+						srsearch: shadowTerm,
 						format: "json",
 						origin: "*",
 					},
@@ -24,18 +34,10 @@ const Search = () => {
 			}
 		};
 
-		if (term && results.length === 0) {
+		if (shadowTerm) {
 			doSearch();
-		} else {
-			let id = window.setTimeout(() => {
-				doSearch();
-			}, 700);
-			return () => {
-				window.clearTimeout(id);
-			};
 		}
-		// eslint-disable-next-line
-	}, [term]);
+	}, [shadowTerm]);
 
 	const renderResults = results.map((result) => {
 		return (
