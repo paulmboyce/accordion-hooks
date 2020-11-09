@@ -1,23 +1,21 @@
 import Axios from "axios";
 
-async function doSearch(term) {
+function doSearch(term) {
 	let results = [];
-	const { data } = await Axios.get(
-		"https://en.wikipedia.org/w/api.php",
-		{
-			params: {
-				action: "query",
-				list: "search",
-				srsearch: term,
-				format: "json",
-				origin: "*",
-			},
+	return Axios.get("https://en.wikipedia.org/w/api.php", {
+		params: {
+			action: "query",
+			list: "search",
+			srsearch: term,
+			format: "json",
+			origin: "*",
+		},
+	}).then(({ data }) => {
+		if (data.query) {
+			results = data.query.search;
 		}
-	);
-	if (data.query) {
-		results = data.query.search;
-	}
-	return results;
+		return results;
+	});
 }
 
 export default doSearch;

@@ -9,15 +9,13 @@ const Search = () => {
 	const [term, setTerm] = useState(initTerm);
 
 	useEffect(() => {
-		const doSearch = () => {
-			console.log("Search for ", term);
-			wpSearch(term).then((result) => {
-				console.log("FOUND: ", result.length);
-				setResults(result);
-			});
+		const doSearch = async () => {
+			const got = await wpSearch(term);
+			setResults(got);
 		};
-
-		doSearch();
+		if (term) {
+			doSearch();
+		}
 	}, [term, setResults]);
 
 	return (
