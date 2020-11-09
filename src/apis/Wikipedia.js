@@ -10,12 +10,17 @@ function doSearch(term) {
 			format: "json",
 			origin: "*",
 		},
-	}).then(({ data }) => {
-		if (data.query) {
-			results = data.query.search;
-		}
-		return results;
-	});
+	})
+		.then(({ data }) => {
+			if (data.query) {
+				results = data.query.search;
+			}
+			return results;
+		})
+		.catch((err) => {
+			console.log("OOPS!: ", err);
+			return [];
+		});
 }
 
 export default doSearch;
