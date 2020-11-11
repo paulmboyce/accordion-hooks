@@ -31,17 +31,14 @@ const App = () => {
 	const initColor = 1;
 	const [color, setColor] = useState(options[initColor]);
 	const [size, setSize] = useState(optionsSize[0]);
+	const [show, setShow] = useState(true);
 
+	console.log("RENDER APP");
 	useEffect(() => {
 		console.log(
 			`APP: selected color: ${JSON.stringify(color)}`
 		);
 	}, [color]);
-	useEffect(() => {
-		console.log(
-			`APP: selected size: ${JSON.stringify(size)}`
-		);
-	}, [size]);
 
 	return (
 		<div
@@ -49,16 +46,23 @@ const App = () => {
 			style={{ marginTop: "40px" }}
 		>
 			<h1>So good to be back coding :)</h1>
-			<Dropdown
-				options={options}
-				onSelectionChange={setColor}
-				init={initColor}
-			/>
-			<Dropdown
-				options={optionsSize}
-				onSelectionChange={setSize}
-				title='Size'
-			/>
+			<button
+				className='ui button grey'
+				onClick={(evt) => {
+					setShow(!show);
+				}}
+			>
+				Toggle
+			</button>
+
+			{show ? (
+				<Dropdown
+					options={options}
+					onSelectionChange={setColor}
+					init={initColor}
+				/>
+			) : null}
+
 			<hr />
 			<Search />
 			<hr />

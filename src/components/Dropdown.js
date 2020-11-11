@@ -4,19 +4,35 @@ const Dropdown = ({ options, onSelectionChange, init }) => {
 	const ref = useRef();
 	init = !init ? 0 : init;
 	const [index, setIndex] = useState(init);
+	console.log("RENDER DROPDOWN");
 
 	useEffect(() => {
-		document.body.addEventListener("click", (event) => {
-			if (ref.current.contains(event.target)) {
+		console.log("SET STATE TO APP");
+		onSelectionChange(options[index]);
+		return () => {
+			console.log("CLEANUP: SET STATE EFFECT");
+		};
+	}, [index, onSelectionChange, options]);
+
+	useEffect(() => {
+		const listener = (event) => {
+			console.log("RUNNING: BODY CLICK EVENT LISTENER");
+			if (
+				!ref.current ||
+				ref.current.contains(event.target)
+			) {
 				return;
 			}
 			ref.current.style.color = "red";
-		});
-	}, []);
+		};
+		console.log("ADD EVENT LISTENER");
+		document.body.addEventListener("click", listener);
 
-	useEffect(() => {
-		onSelectionChange(options[index]);
-	}, [index, onSelectionChange, options]);
+		return () => {
+			console.log("CLEANUP: REMOVE EVENT LISTENER");
+			document.body.removeEventListener("click", listener);
+		};
+	});
 
 	const renderOptions = options.map(
 		({ label, value }, idx) => {
@@ -33,6 +49,7 @@ const Dropdown = ({ options, onSelectionChange, init }) => {
 			className='ui selection fluid dropdown'
 			value={index}
 			onChange={(e) => {
+				console.log("CHANGE");
 				setIndex(parseInt(e.target.value));
 			}}
 		>
