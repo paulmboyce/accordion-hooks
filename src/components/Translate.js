@@ -26,7 +26,15 @@ const Translate = () => {
 			setTranslated(got);
 		};
 
-		doConvert();
+		// Run async code with timer delay to allow for typing
+		const timeoutId = window.setTimeout(doConvert, 1000);
+
+		const cleanupPendingTimer = () => {
+			clearTimeout(timeoutId);
+		};
+
+		// Release last timer
+		return cleanupPendingTimer;
 	}, [text, language]);
 
 	return (
@@ -35,7 +43,7 @@ const Translate = () => {
 			<SearchField
 				initTerm={text}
 				setSearchTerm={setText}
-				typingDelay='600'
+				typingDelay='0'
 				title='What do you want to translate?'
 			/>
 			<br />
