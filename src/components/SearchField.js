@@ -21,7 +21,7 @@ const SearchField = ({
 		<div>
 			<div className='ui form'>
 				<div className='field'>
-					<label>{`${title}:`}</label>
+					<label>{`${title}`}</label>
 					<input
 						className='input'
 						value={term}
