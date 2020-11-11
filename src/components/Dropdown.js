@@ -29,10 +29,10 @@ const Dropdown = ({ options, onSelectionChange, init }) => {
 		document.body.addEventListener("click", listener);
 
 		return () => {
-			console.log("CLEANUP: REMOVE EVENT LISTENER");
+			console.log("CLEANUP: ALWAYS REMOVE EVENT LISTENERS");
 			document.body.removeEventListener("click", listener);
 		};
-	});
+	}, []);
 
 	const renderOptions = options.map(
 		({ label, value }, idx) => {
