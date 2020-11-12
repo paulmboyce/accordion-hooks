@@ -15,41 +15,41 @@ const languages = [
 ];
 
 const Translate = () => {
-	const [text, setText] = useState("Hi there");
+	const [input, setInput] = useState("Hi there");
+	const [text, setText] = useState(input);
 	const [language, setLanguage] = useState(languages[0]);
-	const [translated, setTranslated] = useState("Hola");
+	const [translated, setTranslated] = useState("");
 
 	useEffect(() => {
-		const WAIT_FOR_STOP_TYPING = 700;
+		const throttleTextInput = (delay) => {
+			return window.setTimeout(() => {
+				setText(input);
+			}, delay);
+		};
+		const id = throttleTextInput(1000);
 
-		// Do work async
+		const resetPrevious = () => {
+			clearTimeout(id);
+		};
+
+		return resetPrevious;
+	}, [input]);
+
+	useEffect(() => {
 		const runAsync = async () => {
 			setTranslated("Translating...");
 			const got = await convert(text, language.value);
 			setTranslated(got);
 		};
-
-		// Respond when user stops typing
-		const throttle = (delay) => {
-			return window.setTimeout(runAsync, delay);
-		};
-		const id = throttle(WAIT_FOR_STOP_TYPING);
-
-		// Prevent old response
-		const cleanup = () => {
-			clearTimeout(id);
-		};
-
-		// Send to React (to call next render)
-		return cleanup;
+		runAsync();
 	}, [text, language]);
 
 	return (
 		<div className='ui segment'>
 			<h1>Translate</h1>
 			<SearchField
-				initTerm={text}
-				setSearchTerm={setText}
+				initTerm={input}
+				setSearchTerm={setInput}
 				typingDelay='0'
 				title='What do you want to translate?'
 			/>
