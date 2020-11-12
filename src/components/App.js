@@ -3,6 +3,7 @@ import Accordion from "./Accordion";
 import Search from "./Search";
 import Dropdown from "./Dropdown";
 import Translate from "./Translate";
+import MyRouter from "./MyRouter";
 
 const items = [
 	{ title: "What is React?", content: "A way to get paid" },
@@ -25,6 +26,8 @@ const App = () => {
 	const initColor = 1;
 	const [color, setColor] = useState(options[initColor]);
 	const [show, setShow] = useState(true);
+	const route = window.location.pathname;
+	console.log(`ROUTE is ${route}`);
 
 	useEffect(() => {
 		console.log(
@@ -32,40 +35,66 @@ const App = () => {
 		);
 	}, [color]);
 
+	const renderAccordion = () => {
+		return (
+			<MyRouter
+				route='/'
+				component={<Accordion items={items} />}
+			/>
+		);
+	};
+
+	const renderTranslate = () => {
+		return (
+			<MyRouter
+				route='/translate'
+				component={<Translate />}
+			/>
+		);
+	};
+
+	const renderSearch = () => {
+		return (
+			<MyRouter route='/search' component={<Search />} />
+		);
+	};
+
+	const renderDropdown = () => {
+		return (
+			<MyRouter
+				route='/dropdown'
+				component={
+					<div>
+						<button
+							className='ui button grey'
+							onClick={(evt) => {
+								setShow(!show);
+							}}
+						>
+							Toggle
+						</button>
+
+						{show ? (
+							<Dropdown
+								options={options}
+								onSelectionChange={setColor}
+								init={initColor}
+							/>
+						) : null}
+					</div>
+				}
+			/>
+		);
+	};
+
 	return (
-		<div
-			className='ui container'
-			style={{ marginTop: "40px" }}
-		>
+		<div className='ui container'>
 			<h1>So good to be back coding :)</h1>
 			<hr />
-			<Translate />
-			<hr />
-			<br />
-
-			<button
-				className='ui button grey'
-				onClick={(evt) => {
-					setShow(!show);
-				}}
-			>
-				Toggle
-			</button>
-
-			{show ? (
-				<Dropdown
-					options={options}
-					onSelectionChange={setColor}
-					init={initColor}
-				/>
-			) : null}
-
-			<hr />
-			<Search />
-			<hr />
-			<br />
-
-			<Accordion items={items} />
+			{renderTranslate()}
+			{renderDropdown()}
+			{renderSearch()}
+			{renderAccordion()}
 		</div>
 	);
 };
