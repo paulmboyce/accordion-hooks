@@ -20,21 +20,28 @@ const Translate = () => {
 	const [translated, setTranslated] = useState("Hola");
 
 	useEffect(() => {
-		const doConvert = async () => {
+		const WAIT_FOR_STOP_TYPING = 700;
+
+		// Do work async
+		const runAsync = async () => {
 			setTranslated("Translating...");
 			const got = await convert(text, language.value);
 			setTranslated(got);
 		};
 
-		// Run async code with timer delay to allow for typing
-		const timeoutId = window.setTimeout(doConvert, 1000);
+		// Respond when user stops typing
+		const throttle = (delay) => {
+			return window.setTimeout(runAsync, delay);
+		};
+		const id = throttle(WAIT_FOR_STOP_TYPING);
 
-		const cleanupPendingTimer = () => {
-			clearTimeout(timeoutId);
+		// Prevent old response
+		const cleanup = () => {
+			clearTimeout(id);
 		};
 
-		// Release last timer
-		return cleanupPendingTimer;
+		// Send to React (to call next render)
+		return cleanup;
 	}, [text, language]);
 
 	return (
