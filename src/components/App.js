@@ -62,18 +62,19 @@ const App = () => {
 		<div className='ui container'>
 			<h1>So good to be back coding :)</h1>
 			<hr />
+			<Route path='/translate'>
+				<Translate />
+			</Route>
 
-			<Route path='/translate' component={<Translate />} />
-			<Route path='/search' component={<Search />} />
-			<Route
-				path='/'
-				component={<Accordion items={items} />}
-			/>
+			<Route path='/search'>
+				<Search />
+			</Route>
 
-			<Route
-				path='/dropdown'
-				component={renderDropdown()}
-			/>
+			<Route path='/'>
+				<Accordion items={items} />
+			</Route>
+
+			<Route path='/dropdown'>{renderDropdown()}</Route>
 		</div>
 	);
 };

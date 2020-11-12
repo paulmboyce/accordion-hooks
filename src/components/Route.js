@@ -1,6 +1,6 @@
-const Route = ({ path, component }) => {
+const Route = ({ path, children }) => {
 	return path === window.location.pathname
-		? component
+		? children
 		: null;
 };
 
