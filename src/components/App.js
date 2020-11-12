@@ -3,7 +3,7 @@ import Accordion from "./Accordion";
 import Search from "./Search";
 import Dropdown from "./Dropdown";
 import Translate from "./Translate";
-import MyRouter from "./MyRouter";
+import Route from "./Route";
 
 const items = [
 	{ title: "What is React?", content: "A way to get paid" },
@@ -35,55 +35,26 @@ const App = () => {
 		);
 	}, [color]);
 
-	const renderAccordion = () => {
-		return (
-			<MyRouter
-				route='/'
-				component={<Accordion items={items} />}
-			/>
-		);
-	};
-
-	const renderTranslate = () => {
-		return (
-			<MyRouter
-				route='/translate'
-				component={<Translate />}
-			/>
-		);
-	};
-
-	const renderSearch = () => {
-		return (
-			<MyRouter route='/search' component={<Search />} />
-		);
-	};
-
 	const renderDropdown = () => {
 		return (
-			<MyRouter
-				route='/dropdown'
-				component={
-					<div>
-						<button
-							className='ui button grey'
-							onClick={(evt) => {
-								setShow(!show);
-							}}
-						>
-							Toggle
-						</button>
+			<div>
+				<button
+					className='ui button grey'
+					onClick={(evt) => {
+						setShow(!show);
+					}}
+				>
+					Toggle
+				</button>
 
-						{show ? (
-							<Dropdown
-								options={options}
-								onSelectionChange={setColor}
-								init={initColor}
-							/>
-						) : null}
-					</div>
-				}
-			/>
+				{show ? (
+					<Dropdown
+						options={options}
+						onSelectionChange={setColor}
+						init={initColor}
+					/>
+				) : null}
+			</div>
 		);
 	};
 
@@ -91,10 +62,18 @@ const App = () => {
 		<div className='ui container'>
 			<h1>So good to be back coding :)</h1>
 			<hr />
-			{renderTranslate()}
-			{renderDropdown()}
-			{renderSearch()}
-			{renderAccordion()}
+
+			<Route path='/translate' component={<Translate />} />
+			<Route path='/search' component={<Search />} />
+			<Route
+				path='/'
+				component={<Accordion items={items} />}
+			/>
+
+			<Route
+				path='/dropdown'
+				component={renderDropdown()}
+			/>
 		</div>
 	);
 };
