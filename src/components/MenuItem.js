@@ -25,6 +25,8 @@ const MenuItem = ({
 			href={href}
 			className={className}
 			onClick={(e) => {
+				console.log("Force hash on click event");
+				window.location.hash = href;
 				setActive(e);
 			}}
 		>

@@ -2,26 +2,26 @@ import React, { useState } from "react";
 import MenuItem from "./MenuItem";
 
 const items = [
-	{ href: "/", className: "item", label: "Home" },
-	{ href: "/#search", className: "item", label: "Search" },
+	{ href: "#", className: "item", label: "Home" },
+	{ href: "#search", className: "item", label: "Search" },
 	{
-		href: "/#dropdown",
+		href: "#dropdown",
 		className: "item",
 		label: "Dropdown",
 	},
 	{
-		href: "/#translate",
+		href: "#translate",
 		className: "item",
 		label: "Translate",
 	},
 ];
 
-const NavMenu = ({ refresh, onRefresh }) => {
-	const [activeIndex, setActiveIndex] = useState(0);
+const NavMenu = ({ onNavigate }) => {
+	const [selectedIndex, setSelectedIndex] = useState(0);
 
 	const onItemSelected = (index) => {
-		setActiveIndex(index);
-		onRefresh(!refresh);
+		setSelectedIndex(index);
+		onNavigate(window.location.hash);
 	};
 
 	console.log("Rendering NAV MENU...");
@@ -33,7 +33,7 @@ const NavMenu = ({ refresh, onRefresh }) => {
 					index={index}
 					href={item.href}
 					className={
-						index === activeIndex ? "item active" : "item"
+						index === selectedIndex ? "item active" : "item"
 					}
 					label={item.label}
 					onItemSelected={onItemSelected}
@@ -41,7 +41,7 @@ const NavMenu = ({ refresh, onRefresh }) => {
 			);
 		});
 	};
-	console.log("ACTIVE INDEX", activeIndex);
+	console.log("SELECTED INDEX", selectedIndex);
 	return (
 		<div>
 			<div className='ui secondary pointing menu'>

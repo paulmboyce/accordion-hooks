@@ -27,11 +27,11 @@ const App = () => {
 	const initColor = 1;
 	const [color, setColor] = useState(options[initColor]);
 	const [show, setShow] = useState(true);
-	const [refresh, setRefresh] = useState(false);
-	const route = window.location.hash;
-
+	const [route, setRoute] = useState(
+		window.location.pathname
+	);
 	console.log("Rendering APP...");
-	console.log(`ROUTE is ${route}`);
+	console.log(`ROUTE is ${window.location.href}`);
 
 	useEffect(() => {
 		console.log(
@@ -40,8 +40,8 @@ const App = () => {
 	}, [color]);
 
 	useEffect(() => {
-		console.log("REFRESH is: ", refresh);
-	}, [refresh]);
+		console.log(`Navigated to: ${window.location.hash}`);
+	}, [route]);
 
 	const renderDropdown = () => {
 		return (
@@ -70,7 +70,7 @@ const App = () => {
 		<div className='ui container'>
 			<h1>So good to be back coding :)</h1>
 			<hr />
-			<NavMenu refresh={refresh} onRefresh={setRefresh} />
+			<NavMenu onNavigate={setRoute} />
 
 			<Route path='#translate'>
 				<Translate />
