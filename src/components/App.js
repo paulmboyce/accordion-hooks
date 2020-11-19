@@ -27,7 +27,7 @@ const App = () => {
 	const initColor = 1;
 	const [color, setColor] = useState(options[initColor]);
 	const [show, setShow] = useState(true);
-	const [route, setRoute] = useState(
+	const [urlHash, setUrlHash] = useState(
 		window.location.pathname
 	);
 
@@ -39,7 +39,7 @@ const App = () => {
 
 	useEffect(() => {
 		console.log(`Navigated to: ${window.location.hash}`);
-	}, [route]);
+	}, [urlHash]);
 
 	const renderDropdown = () => {
 		return (
@@ -68,7 +68,7 @@ const App = () => {
 		<div className='ui container'>
 			<h1>So good to be back coding :)</h1>
 			<hr />
-			<NavMenu onNavigate={setRoute} />
+			<NavMenu onNavigate={setUrlHash} />
 
 			<Route path='#translate'>
 				<Translate />

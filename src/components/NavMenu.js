@@ -2,18 +2,10 @@ import React, { useState } from "react";
 import MenuItem from "./MenuItem";
 
 const items = [
-	{ href: "#", className: "item", label: "Home" },
-	{ href: "#search", className: "item", label: "Search" },
-	{
-		href: "#dropdown",
-		className: "item",
-		label: "Dropdown",
-	},
-	{
-		href: "#translate",
-		className: "item",
-		label: "Translate",
-	},
+	{ href: "#", label: "Home" },
+	{ href: "#search", label: "Search" },
+	{ href: "#dropdown", label: "Dropdown" },
+	{ href: "#translate", label: "Translate" },
 ];
 
 const NavMenu = ({ onNavigate }) => {
@@ -32,7 +24,8 @@ const NavMenu = ({ onNavigate }) => {
 					index={index}
 					href={item.href}
 					className={
-						index === selectedIndex ? "item active" : "item"
+						"item" +
+						(index === selectedIndex ? " active" : "")
 					}
 					label={item.label}
 					onItemSelected={onItemSelected}
