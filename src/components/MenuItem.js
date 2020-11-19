@@ -4,27 +4,24 @@ const MenuItem = ({
 	href,
 	className,
 	label,
-	setActiveMenu,
+	index,
+	onItemSelected,
 }) => {
-	const ref = useRef();
+	const _ref = useRef();
 
 	const setActive = (event) => {
-		if (ref.current !== event.target) {
+		if (_ref.current !== event.target) {
 			return;
 		}
-
-		const className = event.target.className;
-		if (className.includes("active")) {
-			event.target.className = "active item";
-			setActiveMenu(event.target);
-		} else {
-			event.target.className = "item";
-		}
+		onItemSelected(
+			parseInt(event.target.getAttribute("index"))
+		);
 	};
 
 	return (
 		<a
-			ref={ref}
+			ref={_ref}
+			index={index}
 			href={href}
 			className={className}
 			onClick={(e) => {

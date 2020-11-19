@@ -27,7 +27,10 @@ const App = () => {
 	const initColor = 1;
 	const [color, setColor] = useState(options[initColor]);
 	const [show, setShow] = useState(true);
-	const route = window.location.pathname;
+	const [refresh, setRefresh] = useState(false);
+	const route = window.location.hash;
+
+	console.log("Rendering APP...");
 	console.log(`ROUTE is ${route}`);
 
 	useEffect(() => {
@@ -35,6 +38,10 @@ const App = () => {
 			`APP: selected color: ${JSON.stringify(color)}`
 		);
 	}, [color]);
+
+	useEffect(() => {
+		console.log("REFRESH is: ", refresh);
+	}, [refresh]);
 
 	const renderDropdown = () => {
 		return (
@@ -63,21 +70,21 @@ const App = () => {
 		<div className='ui container'>
 			<h1>So good to be back coding :)</h1>
 			<hr />
-			<NavMenu />
+			<NavMenu refresh={refresh} onRefresh={setRefresh} />
 
-			<Route path='/translate'>
+			<Route path='#translate'>
 				<Translate />
 			</Route>
 
-			<Route path='/search'>
+			<Route path='#search'>
 				<Search />
 			</Route>
 
-			<Route path='/'>
+			<Route path=''>
 				<Accordion items={items} />
 			</Route>
 
-			<Route path='/dropdown'>{renderDropdown()}</Route>
+			<Route path='#dropdown'>{renderDropdown()}</Route>
 		</div>
 	);
 };
