@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "./Link";
 
 const MenuItem = ({
 	href,
@@ -13,22 +14,15 @@ const MenuItem = ({
 		);
 	};
 
-	const forceHashBeforeReRender = (hash) => {
-		window.location.hash = hash;
-	};
-
 	return (
-		<a
+		<Link
 			index={index}
 			href={href}
 			className={className}
-			onClick={(e) => {
-				forceHashBeforeReRender(href);
-				setActive(e);
-			}}
+			onNavigate={setActive}
 		>
 			{label}
-		</a>
+		</Link>
 	);
 };
 
