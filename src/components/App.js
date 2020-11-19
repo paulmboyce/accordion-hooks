@@ -30,8 +30,6 @@ const App = () => {
 	const [route, setRoute] = useState(
 		window.location.pathname
 	);
-	console.log("Rendering APP...");
-	console.log(`ROUTE is ${window.location.href}`);
 
 	useEffect(() => {
 		console.log(

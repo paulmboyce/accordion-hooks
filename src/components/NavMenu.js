@@ -24,7 +24,6 @@ const NavMenu = ({ onNavigate }) => {
 		onNavigate(window.location.hash);
 	};
 
-	console.log("Rendering NAV MENU...");
 	const renderMenuItems = () => {
 		return items.map((item, index) => {
 			return (
@@ -41,7 +40,6 @@ const NavMenu = ({ onNavigate }) => {
 			);
 		});
 	};
-	console.log("SELECTED INDEX", selectedIndex);
 	return (
 		<div>
 			<div className='ui secondary pointing menu'>

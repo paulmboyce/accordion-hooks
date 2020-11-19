@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 
 const MenuItem = ({
 	href,
@@ -7,26 +7,23 @@ const MenuItem = ({
 	index,
 	onItemSelected,
 }) => {
-	const _ref = useRef();
-
 	const setActive = (event) => {
-		if (_ref.current !== event.target) {
-			return;
-		}
 		onItemSelected(
 			parseInt(event.target.getAttribute("index"))
 		);
 	};
 
+	const forceHashBeforeReRender = (hash) => {
+		window.location.hash = hash;
+	};
+
 	return (
 		<a
-			ref={_ref}
 			index={index}
 			href={href}
 			className={className}
 			onClick={(e) => {
-				console.log("Force hash on click event");
-				window.location.hash = href;
+				forceHashBeforeReRender(href);
 				setActive(e);
 			}}
 		>
