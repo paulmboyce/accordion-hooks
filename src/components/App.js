@@ -4,6 +4,7 @@ import Search from "./Search";
 import Dropdown from "./Dropdown";
 import Translate from "./Translate";
 import Route from "./Route";
+import NavMenu from "./NavMenu";
 
 const items = [
 	{ title: "What is React?", content: "A way to get paid" },
@@ -62,6 +63,8 @@ const App = () => {
 		<div className='ui container'>
 			<h1>So good to be back coding :)</h1>
 			<hr />
+			<NavMenu />
+
 			<Route path='/translate'>
 				<Translate />
 			</Route>
