@@ -8,7 +8,7 @@ const MenuItem = ({
 	index,
 	onItemSelected,
 }) => {
-	const setActive = (event) => {
+	const setActiveMenuItem = (event) => {
 		onItemSelected(
 			parseInt(event.target.getAttribute("index"))
 		);
@@ -19,7 +19,7 @@ const MenuItem = ({
 			index={index}
 			href={href}
 			className={className}
-			onNavigate={setActive}
+			onNavigate={setActiveMenuItem}
 		>
 			{label}
 		</Link>
