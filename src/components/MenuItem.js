@@ -19,7 +19,7 @@ const MenuItem = ({
 			index={index}
 			href={href}
 			className={className}
-			onNavigate={setActiveMenuItem}
+			onClickLink={setActiveMenuItem}
 		>
 			{label}
 		</Link>

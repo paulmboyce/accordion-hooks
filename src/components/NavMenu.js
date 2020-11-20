@@ -1,33 +1,25 @@
 import React, { useState } from "react";
 import MenuItem from "./MenuItem";
 
-const items = [
-	{ href: "/", label: "Home" },
-	{ href: "/search", label: "Search" },
-	{ href: "/dropdown", label: "Dropdown" },
-	{ href: "/translate", label: "Translate" },
-];
-
-const NavMenu = ({ onNavigate }) => {
+const NavMenu = ({ items }) => {
 	const [selectedIndex, setSelectedIndex] = useState(0);
 
 	const onItemSelected = (index) => {
 		setSelectedIndex(index);
-		onNavigate(window.location.pathname);
 	};
 
 	const renderMenuItems = () => {
-		return items.map((item, index) => {
+		return items.map(({ href, label }, index) => {
 			return (
 				<MenuItem
 					key={index}
 					index={index}
-					href={item.href}
+					href={href}
 					className={
 						"item" +
 						(index === selectedIndex ? " active" : "")
 					}
-					label={item.label}
+					label={label}
 					onItemSelected={onItemSelected}
 				/>
 			);

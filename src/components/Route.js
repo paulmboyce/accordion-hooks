@@ -1,5 +1,21 @@
+import { useEffect, useState } from "react";
+
 const Route = ({ path, children }) => {
-	return path === window.location.pathname ? children : null;
+	const [winLocPath, setwinLocPath] = useState(
+		window.location.pathname
+	);
+
+	useEffect(() => {
+		window.addEventListener(
+			"LINK_CLICK",
+			(event) => {
+				setwinLocPath(window.location.pathname);
+			},
+			false
+		);
+	}, []);
+
+	return path === winLocPath ? children : null;
 };
 
 export default Route;

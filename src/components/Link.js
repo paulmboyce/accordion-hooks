@@ -5,7 +5,7 @@ const Link = ({
 	className,
 	children,
 	index,
-	onNavigate,
+	onClickLink,
 }) => {
 	return (
 		<a
@@ -15,7 +15,10 @@ const Link = ({
 			onClick={(e) => {
 				e.preventDefault();
 				window.history.pushState({}, "", href);
-				onNavigate(e);
+				onClickLink(e);
+
+				const event = new Event("LINK_CLICK");
+				window.dispatchEvent(event);
 			}}
 		>
 			{children}
