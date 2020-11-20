@@ -7,17 +7,14 @@ const Link = ({
 	index,
 	onNavigate,
 }) => {
-	const forceHashBeforeReRender = (hash) => {
-		window.location.hash = hash;
-	};
-
 	return (
 		<a
 			index={index}
 			href={href}
 			className={className}
 			onClick={(e) => {
-				forceHashBeforeReRender(href);
+				e.preventDefault();
+				window.history.pushState({}, "", href);
 				onNavigate(e);
 			}}
 		>

@@ -1,5 +1,5 @@
 const Route = ({ path, children }) => {
-	return path === window.location.hash ? children : null;
+	return path === window.location.pathname ? children : null;
 };
 
 export default Route;

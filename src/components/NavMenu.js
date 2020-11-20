@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import MenuItem from "./MenuItem";
 
 const items = [
-	{ href: "#", label: "Home" },
-	{ href: "#search", label: "Search" },
-	{ href: "#dropdown", label: "Dropdown" },
-	{ href: "#translate", label: "Translate" },
+	{ href: "/", label: "Home" },
+	{ href: "/search", label: "Search" },
+	{ href: "/dropdown", label: "Dropdown" },
+	{ href: "/translate", label: "Translate" },
 ];
 
 const NavMenu = ({ onNavigate }) => {
@@ -13,7 +13,7 @@ const NavMenu = ({ onNavigate }) => {
 
 	const onItemSelected = (index) => {
 		setSelectedIndex(index);
-		onNavigate(window.location.hash);
+		onNavigate(window.location.pathname);
 	};
 
 	const renderMenuItems = () => {

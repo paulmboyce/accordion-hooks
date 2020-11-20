@@ -27,7 +27,7 @@ const App = () => {
 	const initColor = 1;
 	const [color, setColor] = useState(options[initColor]);
 	const [show, setShow] = useState(true);
-	const [urlHash, setUrlHash] = useState(
+	const [urlPath, setUrlPath] = useState(
 		window.location.pathname
 	);
 
@@ -38,8 +38,10 @@ const App = () => {
 	}, [color]);
 
 	useEffect(() => {
-		console.log(`Navigated to: ${window.location.hash}`);
-	}, [urlHash]);
+		console.log(
+			`Navigated to: ${window.location.pathname}`
+		);
+	}, [urlPath]);
 
 	const renderDropdown = () => {
 		return (
@@ -68,21 +70,21 @@ const App = () => {
 		<div className='ui container'>
 			<h1>So good to be back coding :)</h1>
 			<hr />
-			<NavMenu onNavigate={setUrlHash} />
+			<NavMenu onNavigate={setUrlPath} />
 
-			<Route path='#translate'>
+			<Route path='/translate'>
 				<Translate />
 			</Route>
 
-			<Route path='#search'>
+			<Route path='/search'>
 				<Search />
 			</Route>
 
-			<Route path=''>
+			<Route path='/'>
 				<Accordion items={items} />
 			</Route>
 
-			<Route path='#dropdown'>{renderDropdown()}</Route>
+			<Route path='/dropdown'>{renderDropdown()}</Route>
 		</div>
 	);
 };
